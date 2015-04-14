@@ -35,3 +35,5 @@ add_subdirectory(CxxPVSMPipelineExample)
 add_subdirectory(CxxMappedDataArrayExample)
 add_subdirectory(MPISubCommunicatorExample)
 add_subdirectory(PythonDolfinExample)
+# MADHU: KVL Specific Examples
+add_subdirectory(KVLInSituExample-001)
