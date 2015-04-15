@@ -1,8 +1,9 @@
 #include "FEDataStructures.h"
 
-#include <iostream>
-#include <mpi.h>
+
 #include <assert.h>
+
+extern Logger* LOG;
 
 Grid::Grid()
 {
@@ -21,7 +22,7 @@ void Grid::Initialize(const unsigned int numPoints[3], const double spacing[3] )
     this->NumPoints[i] = numPoints[i];
     this->Spacing[i] = spacing[i];
     }
-  int mpiRank = 0, mpiSize = 1;
+  mpiRank = 0, mpiSize = 1;
   MPI_Comm_rank(MPI_COMM_WORLD, &mpiRank);
   MPI_Comm_size(MPI_COMM_WORLD, &mpiSize);
   this->Extent[0] = mpiRank*numPoints[0]/mpiSize;
@@ -99,15 +100,17 @@ void Attributes::UpdateFields(double time)
         double coord[3];
         this->GridPtr->GetLocalPoint(pt, coord);
 
-        this->Velocity[pt] = A * sin(k1*coord[1]-w1*time);
-        this->Velocity[pt+numPoints] = B * sin(k2*coord[2]-w2*time);
-        this->Velocity[pt+2*numPoints] = C * sin(k3*coord[0]-w3*time);
+        this->Velocity[pt] = A * pow(sin(k1*coord[1]-w1*time),2.0);
+        this->Velocity[pt+numPoints] = B * pow(sin(k2*coord[2]-w2*time),2.0);
+        this->Velocity[pt+2*numPoints] = C * pow(sin(k3*coord[0]-w3*time),2.0);
     }
 
     unsigned int numCells = this->GridPtr->GetNumberOfLocalCells();
     this->Pressure.resize(numCells);
     std::fill(this->Pressure.begin(), this->Pressure.end(), 1.);
-}
+
+
+ }
 
 /*
 void Attributes::UpdateFields(double time)

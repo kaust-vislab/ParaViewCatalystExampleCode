@@ -1,9 +1,37 @@
 #ifndef FEDATASTRUCTURES_HEADER
 #define FEDATASTRUCTURES_HEADER
 
+#include <mpi.h>
 #include <cstddef>
 #include <vector>
 #include <cmath>
+#include <iostream>
+#include <fstream>
+
+
+class Logger{
+ public:
+    std::ofstream logfile;
+
+    Logger(){
+        if(logfile.is_open()){
+            std::cout<<"Error: File already open !"<<std::endl;
+        }
+        else{
+            int mpiRank = 0;
+            MPI_Comm_rank(MPI_COMM_WORLD, &mpiRank);
+            char filename[80];
+            sprintf(filename,"logfile-rank-%03d.log",mpiRank);
+            logfile.open(filename);
+        }
+    }
+    void write(const char* msg){
+        logfile<<msg<<std::endl;
+    }
+    ~Logger(){
+        logfile.close();
+    }
+};
 
 class Grid
 {
@@ -16,6 +44,9 @@ public:
   unsigned int* GetNumPoints();
   unsigned int* GetExtent();
   double* GetSpacing();
+
+  int mpiRank;
+  int mpiSize;
 private:
   unsigned int NumPoints[3];
   unsigned int Extent[6];

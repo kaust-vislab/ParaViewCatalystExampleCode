@@ -18,11 +18,16 @@
 // that the driver can be run without linking
 // to Catalyst.
 
+
+Logger* LOG;
+
 int main(int argc, char* argv[])
 {
   MPI_Init(&argc, &argv);
   Grid grid;
-  unsigned int numPoints[3] = {1024, 256, 256};
+  LOG = new Logger();
+
+  unsigned int numPoints[3] = {128, 128, 128};
   double spacing[3] = {1, 1.1, 1.3};
   grid.Initialize(numPoints, spacing);
   Attributes attributes;
@@ -31,7 +36,7 @@ int main(int argc, char* argv[])
 #ifdef USE_CATALYST
   FEAdaptor::Initialize(argc, argv);
 #endif
-  unsigned int numberOfTimeSteps = 100;
+  unsigned int numberOfTimeSteps = 10;
   for(unsigned int timeStep=0;timeStep<numberOfTimeSteps;timeStep++)
     {
     // use a time step length of 0.1
