@@ -1,0 +1,16 @@
+gpgpu-00 max_slots=8
+gpgpu-01 max_slots=8
+gpgpu-02 max_slots=8
+gpgpu-03 max_slots=8
+gpgpu-04 max_slots=8
+gpgpu-05 max_slots=8
+gpgpu-06 max_slots=8
+gpgpu-07 max_slots=8
+gpgpu-08 max_slots=8
+gpgpu-09 max_slots=8
+gpgpu-10 max_slots=8
+gpgpu-11 max_slots=8
+gpgpu-12 max_slots=8
+gpgpu-13 max_slots=8
+gpgpu-14 max_slots=8
+gpgpu-15 max_slots=8

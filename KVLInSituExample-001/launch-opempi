@@ -1,0 +1,8 @@
+#!/bin/bash
+
+module load paraview/4.3.1
+
+HOSTFILE=/home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/KVLInSituExample-001/hosts
+NUM_PROCS=2
+
+mpirun -x LD_LIBRARY_PATH -x PATH -x PYTHONPATH  -hostfile $HOSTS -np $NUM_PROCS /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/build/KVLInSituExample-001/KVLInSituExample001 /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/KVLInSituExample-001/SampleScripts/feslicescript.py
