@@ -82,7 +82,7 @@ public:
   void UpdateFields(double time);
   double* GetVelocityArray();
   float* GetPressureArray();
-
+  void SaveFields(double time);
 private:
   std::vector<double> Velocity;
   std::vector<float> Pressure;

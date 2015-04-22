@@ -94,6 +94,9 @@ void Attributes::UpdateFields(double time)
     unsigned int numPoints = this->GridPtr->GetNumberOfLocalPoints();
 
     this->Velocity.resize(numPoints*3);
+    char buffer[80];
+    sprintf(buffer,"Timestep: %f", time);
+    LOG->write(buffer);
 
     for(unsigned int pt=0;pt<numPoints;pt++)
     {
@@ -103,14 +106,41 @@ void Attributes::UpdateFields(double time)
         this->Velocity[pt] = A * pow(sin(k1*coord[1]-w1*time),2.0);
         this->Velocity[pt+numPoints] = B * pow(sin(k2*coord[2]-w2*time),2.0);
         this->Velocity[pt+2*numPoints] = C * pow(sin(k3*coord[0]-w3*time),2.0);
+
+        //sprintf(buffer,"%03d: %f %f %f",pt, coord[0], coord[1], coord[2]);
+        //LOG->write(buffer);
     }
 
     unsigned int numCells = this->GridPtr->GetNumberOfLocalCells();
     this->Pressure.resize(numCells);
     std::fill(this->Pressure.begin(), this->Pressure.end(), 1.);
-
-
  }
+
+void Attributes::SaveFields(double time){
+    //Gather all partial results to the root process
+    double *_velocity=NULL;
+    //_velocity.resize(0);
+    if(this->GridPtr->mpiRank == 0){
+        _velocity = new double[this->Velocity.size()*this->GridPtr->mpiSize];
+    }
+
+    char buffer[80];
+    for(int i=0;i<this->Velocity.size();++i){
+        sprintf(buffer,"%f",Velocity[i]);
+        //LOG->write(buffer);
+    }
+
+    MPI_Gather(&Velocity[0], Velocity.size(), MPI_DOUBLE,_velocity,
+               Velocity.size(), MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
+    if(this->GridPtr->mpiRank == 0){
+        LOG->write("Rank 0 finished collecting all data");
+        /*for(int i=0;i<this->Velocity.size()*this->GridPtr->mpiSize;++i){
+            sprintf(buffer,"%f",_velocity[i]);
+            LOG->write(buffer);
+            }*/
+    }
+}
 
 /*
 void Attributes::UpdateFields(double time)

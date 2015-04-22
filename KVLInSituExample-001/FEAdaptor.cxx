@@ -15,6 +15,8 @@
 #include <vtkPoints.h>
 #include <vtkPointData.h>
 
+extern Logger* LOG;
+
 namespace
 {
   vtkCPProcessor* Processor = NULL;
@@ -91,8 +93,10 @@ namespace FEAdaptor
 
   void Initialize(int numScripts, char* scripts[])
   {
+
     if(Processor == NULL)
       {
+      LOG->write("Inside FEAdaptor::Intialize()");
       Processor = vtkCPProcessor::New();
       Processor->Initialize();
       }
@@ -103,8 +107,10 @@ namespace FEAdaptor
     for(int i=1;i<numScripts;i++)
       {
       vtkNew<vtkCPPythonScriptPipeline> pipeline;
+      LOG->write(scripts[i]);
       pipeline->Initialize(scripts[i]);
       Processor->AddPipeline(pipeline.GetPointer());
+      LOG->write("Initialized coprocessor");
       }
   }
 

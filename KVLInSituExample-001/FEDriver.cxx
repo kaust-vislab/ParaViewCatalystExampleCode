@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
   Grid grid;
   LOG = new Logger();
 
-  unsigned int numPoints[3] = {128, 128, 128};
+  unsigned int numPoints[3] = {256, 128, 128};
   double spacing[3] = {1, 1.1, 1.3};
   grid.Initialize(numPoints, spacing);
   Attributes attributes;
@@ -36,12 +36,13 @@ int main(int argc, char* argv[])
 #ifdef USE_CATALYST
   FEAdaptor::Initialize(argc, argv);
 #endif
-  unsigned int numberOfTimeSteps = 10;
+  unsigned int numberOfTimeSteps = 1;
   for(unsigned int timeStep=0;timeStep<numberOfTimeSteps;timeStep++)
     {
     // use a time step length of 0.1
     double time = timeStep * 0.1;
     attributes.UpdateFields(time);
+    //attributes.SaveFields(time);
 #ifdef USE_CATALYST
     FEAdaptor::CoProcess(grid, attributes, time, timeStep, timeStep == numberOfTimeSteps-1);
 #endif
