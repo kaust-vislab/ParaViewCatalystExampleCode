@@ -4,6 +4,7 @@ module load kvl-remote
 module load paraview/4.3.1
 
 HOSTS=gpgpu-00,gpgpu-01,gpgpu-02,gpgpu-03,gpgpu-04,gpgpu-05,gpgpu-06,gpgpu-07,gpgpu-08,gpgpu-09,gpgpu-10,gpgpu-11,gpgpu-12,gpgpu-13,gpgpu-14,gpgpu-15
-NUM_PROCS=2.gd
+NUM_PROCS=4
 
-mpirun -genvlist LD_LIBRARY_PATH,PATH,PYTHONPATH  -hosts $HOSTS -np $NUM_PROCS /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/build/KVLInSituExample-001/KVLInSituExample001 /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/KVLInSituExample-001/SampleScripts/feslicescript.py
+#mpirun -genvlist LD_LIBRARY_PATH,PATH,PYTHONPATH  -hosts $HOSTS -np $NUM_PROCS
+mpirun  -hosts $HOSTS -np $NUM_PROCS /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/build/KVLInSituExample-001/KVLInSituExample001 /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/KVLInSituExample-001/SampleScripts/feslicescript.py
