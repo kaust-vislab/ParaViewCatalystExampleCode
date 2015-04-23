@@ -4,6 +4,6 @@ module load paraview/4.3.1-openmpi-dev
 
 
 HOSTFILE=/home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/KVLInSituExample-001/hosts
-NUM_PROCS=1
+NUM_PROCS=2
 
-/usr/lib64/openmpi/bin/mpirun -x LD_LIBRARY_PATH -x PATH -x PYTHONPATH  -hostfile $HOSTFILE -np $NUM_PROCS -npernode 1 /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/build/KVLInSituExample-001/KVLInSituExample001 /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/KVLInSituExample-001/SampleScripts/feslicescript.py
+/usr/lib64/openmpi/bin/mpirun -x LD_LIBRARY_PATH -x PATH -x PYTHONPATH  -hostfile $HOSTFILE -np $NUM_PROCS -npernode 8 /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/build/KVLInSituExample-001/KVLInSituExample001 /home/srinivm/develop/github/kvl/ParaViewCatalystExampleCode/KVLInSituExample-001/SampleScripts/feslicescript.py

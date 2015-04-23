@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
   LOG = new Logger();
 
   unsigned int numPoints[3] = {256, 128, 128};
-  double spacing[3] = {1, 1.1, 1.3};
+  double spacing[3] = {1, 1, 1};
   grid.Initialize(numPoints, spacing);
   Attributes attributes;
   attributes.Initialize(&grid);
