@@ -21,7 +21,7 @@ class Logger{
             int mpiRank = 0;
             MPI_Comm_rank(MPI_COMM_WORLD, &mpiRank);
             char filename[80];
-            sprintf(filename,"logfile-rank-%03d.log",mpiRank);
+            sprintf(filename,"logs/logfile-rank-%03d.log",mpiRank);
             logfile.open(filename);
         }
     }
@@ -55,17 +55,17 @@ private:
 
 const float TWO_PI = 6.28318530718;
 
-const float A = 1.50;
-const float B = 2.30;
-const float C = 1.85;
+const float A = 5.0;
+const float B = 10.0;
+const float C = 0.0;
 
-const float k1 = TWO_PI*1.5;
-const float k2 = TWO_PI*1.0;
-const float k3 = TWO_PI*0.6;
+const float k1 = 0.00032;
+const float k2 = 0.0314;
+const float k3 = 0.00124;
 
-const float w1 = TWO_PI*0.5;
-const float w2 = TWO_PI*0.8;
-const float w3 = TWO_PI*2.5;
+const float w1 = TWO_PI*0.0;
+const float w2 = TWO_PI*0.0;
+const float w3 = TWO_PI*0.0;
 
 
 
