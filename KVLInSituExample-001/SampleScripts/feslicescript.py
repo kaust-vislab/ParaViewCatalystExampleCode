@@ -15,15 +15,15 @@ def CreateCoProcessor():
     class Pipeline:
       filename_2_pvti = coprocessor.CreateProducer( datadescription, "input" )
 
-      ParallelImageDataWriter1 = coprocessor.CreateWriter( XMLPImageDataWriter, "output/fullgrid_%t.pvti", 100 )
+      ParallelImageDataWriter1 = coprocessor.CreateWriter( XMLPImageDataWriter, "output/fullgrid_%t.pvti", 1 )
 
       SetActiveSource(filename_2_pvti)
-      Slice1 = Slice( guiName="Slice1", Crinkleslice=0, SliceOffsetValues=[0.0], Triangulatetheslice=1, SliceType="Plane" )
-      Slice1.SliceType.Offset = 0.0
-      Slice1.SliceType.Origin = [9.0, 33.0, 28.6]
-      Slice1.SliceType.Normal = [1.0, 0.0, 0.0]
+      #Slice1 = Slice( guiName="Slice1", Crinkleslice=0, SliceOffsetValues=[0.0], Triangulatetheslice=1, SliceType="Plane" )
+      #Slice1.SliceType.Offset = 0.0
+      #Slice1.SliceType.Origin = [9.0, 33.0, 28.6]
+      #Slice1.SliceType.Normal = [1.0, 0.0, 0.0]
 
-      ParallelPolyDataWriter1 = coprocessor.CreateWriter( XMLPPolyDataWriter, "output/slice_%t.pvtp", 10 )
+      #ParallelPolyDataWriter1 = coprocessor.CreateWriter( XMLPPolyDataWriter, "output/slice_%t.pvtp", 10 )
 
     return Pipeline()
 
@@ -32,7 +32,7 @@ def CreateCoProcessor():
       self.Pipeline = _CreatePipeline(self, datadescription)
 
   coprocessor = CoProcessor()
-  freqs = {'input': [10, 100]}
+  freqs = {'input': [1]}
   coprocessor.SetUpdateFrequencies(freqs)
   return coprocessor
 

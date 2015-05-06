@@ -103,9 +103,9 @@ void Attributes::UpdateFields(double time)
         double coord[3];
         this->GridPtr->GetLocalPoint(pt, coord);
 
-        this->Velocity[pt] = 0.1*(coord[2]-512.0)*time;
-        this->Velocity[pt+numPoints] = 0.054*(coord[0]-256.0)*time;
-        this->Velocity[pt+2*numPoints] = 0.085*(coord[1]-256.0)*time;
+        this->Velocity[pt] = 0.1*(coord[2]-512.0)*time*time;
+        this->Velocity[pt+numPoints] = 0.054*(coord[0]-256.0)*pow(time,0.5);
+        this->Velocity[pt+2*numPoints] = 0.085*(coord[1]-256.0)*pow(time,1.45);
 
         //sprintf(buffer,"%03d: %f %f %f",pt, coord[0], coord[1], coord[2]);
         //LOG->write(buffer);
