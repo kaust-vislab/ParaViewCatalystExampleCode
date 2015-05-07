@@ -36,11 +36,11 @@ int main(int argc, char* argv[])
 #ifdef USE_CATALYST
   FEAdaptor::Initialize(argc, argv);
 #endif
-  unsigned int numberOfTimeSteps = 10;
+  unsigned int numberOfTimeSteps = 100;
   for(unsigned int timeStep=0;timeStep<numberOfTimeSteps;timeStep++)
     {
     // use a time step length of 0.1
-    double time = timeStep * 0.1;
+    double time = timeStep * 0.01;
     attributes.UpdateFields(time);
 #ifdef USE_CATALYST
     FEAdaptor::CoProcess(grid, attributes, time, timeStep, timeStep == numberOfTimeSteps-1);
