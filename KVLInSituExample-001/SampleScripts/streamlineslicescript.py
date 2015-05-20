@@ -44,7 +44,7 @@ def CreateCoProcessor():
       # register the writer with coprocessor
       # and provide it with information such as the filename to use,
       # how frequently to write the data, etc.
-      coprocessor.RegisterWriter(parallelPolyDataWriter2, filename='output.03/slice_%t.pvtp', freq=1)
+      coprocessor.RegisterWriter(parallelPolyDataWriter2, filename='output.04/slice_%t.pvtp', freq=1)
 
       # create a new 'Stream Tracer'
       streamTracer1 = StreamTracer(Input=calculator1,
@@ -63,7 +63,7 @@ def CreateCoProcessor():
       # register the writer with coprocessor
       # and provide it with information such as the filename to use,
       # how frequently to write the data, etc.
-      coprocessor.RegisterWriter(parallelPolyDataWriter1, filename='output.03/streamlines_%t.pvtp', freq=1)
+      coprocessor.RegisterWriter(parallelPolyDataWriter1, filename='output.04/streamlines_%t.pvtp', freq=1)
 
     return Pipeline()
 
@@ -86,7 +86,7 @@ coprocessor = CreateCoProcessor()
 
 #--------------------------------------------------------------
 # Enable Live-Visualizaton with ParaView
-coprocessor.EnableLiveVisualization(False, 1)
+coprocessor.EnableLiveVisualization(True, 1)
 
 
 # ---------------------- Data Selection method ----------------------
@@ -123,4 +123,4 @@ def DoCoProcessing(datadescription):
     coprocessor.WriteImages(datadescription, rescale_lookuptable=False)
 
     # Live Visualization, if enabled.
-    coprocessor.DoLiveVisualization(datadescription, "localhost", 22222)
+    coprocessor.DoLiveVisualization(datadescription, "madhu-00.vis.kaust.edu.sa", 22222)
