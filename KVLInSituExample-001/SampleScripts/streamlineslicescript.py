@@ -117,10 +117,10 @@ def DoCoProcessing(datadescription):
     coprocessor.UpdateProducers(datadescription)
 
     # Write output data, if appropriate.
-    coprocessor.WriteData(datadescription);
+    #coprocessor.WriteData(datadescription);
 
     # Write image capture (Last arg: rescale lookup table), if appropriate.
-    coprocessor.WriteImages(datadescription, rescale_lookuptable=False)
+    #coprocessor.WriteImages(datadescription, rescale_lookuptable=False)
 
     # Live Visualization, if enabled.
     coprocessor.DoLiveVisualization(datadescription, "madhu-00.vis.kaust.edu.sa", 22222)
