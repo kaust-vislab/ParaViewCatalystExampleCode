@@ -1,0 +1,19 @@
+#!/bin/sh
+# @ account_no = k119
+# @ error = $(job_name).$(jobid).outerr
+# @ output = $(job_name).$(jobid).out
+# @ job_name = paraview
+# @ wall_clock_limit = 00:30:00
+# @ environment = COPY_ALL
+# @ job_type = parallel
+# @ node = 8
+# @ tasks_per_node = 8
+# @ queue
+
+# Load environment modules
+module use ~/share/modulefiles/
+module load localparaview/4.3.1
+module remove altd/1.0.1
+
+
+$MPIEXEC -x LD_LIBRARY_PATH -x PATH -x PYTHONPATH -np $LOADL_TOTAL_TASKS -npernode 8 /home/srinivm/develop/ParaViewCatalystExampleCode/build/KVLInSituExample-001/KVLInSituExample001 /home/srinivm/develop/ParaViewCatalystExampleCode/KVLInSituExample-001/SampleScripts/streamlineslicescript.py
